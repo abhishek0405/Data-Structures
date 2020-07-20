@@ -72,13 +72,23 @@ void buildll(node*&head){
         }
     return;
     }
+
+ istream& operator >>(istream &ip,node*&head){
+    buildll(head);
+    return ip;
+}
+
+ostream& operator <<(ostream&op,node*head){
+    printnode(head);
+    return op;
+}
     
 
 
 int main(){
     node *head = NULL;
-    buildll(head);
-    printnode(head);
+    cin>>head;
+    cout<<head;
     cout<<endl;
     searchnodeiterative(head,5);
     searchnodeiterative(head,7);
