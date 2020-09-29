@@ -20,7 +20,8 @@ class graph{
             //it would be a pair like this-> <string>,list<pair<<string,integer>> ie a string ->list of pairs
             string source = it.first;
             for(auto it1: it.second){
-                //it1 would be list of pairs (string,dist)
+		//it.second is list of pairs.
+                //it1 would be a pair(string,dist)
                 string dest = it1.first;
                 int dist = it1.second;
                 cout<<"Distance between "<<source<<" and "<<dest<<" is "<<dist<<endl;
