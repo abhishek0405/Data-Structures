@@ -20,7 +20,7 @@ class graph{
         mp[x].push_back(y);
     }
 
-    void dfs(int s,int *visited,list<int>&topologicalorder){ //ensure to bass by ref
+    void dfs(int s,int *visited,list<int>&topologicalorder){ //ensure to pass by ref
         visited[s]=1;
         for(auto nbr:mp[s]){
             if(!visited[nbr]){
