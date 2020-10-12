@@ -1,0 +1,76 @@
+#include <iostream>
+using namespace std;
+#include<vector>
+#include<list>
+#include<climits>
+
+class graph{
+    list<pair<pair<int,int>,int>> l;// edge list rep
+   // vector<int> distvec;
+    int distvec[100];
+    int vertices;
+    public:
+    graph(int v,int src){
+        int i;
+        vertices=v;
+        for(i=0;i<v;i++){
+            distvec[i]=INT_MAX;
+        }
+        distvec[src]=0;
+    }
+
+    void add_edge(int x,int y,int dist){
+        l.push_back(make_pair(make_pair(x,y),dist));
+    }
+
+    void bellman(){
+      int b=1;
+      int i;
+      for(i=0;i<vertices-1;i++){// no of iterations
+            // cover all edges in each iter
+            for(auto edge:l){
+                int x = edge.first.first;
+                int y = edge.first.second;
+                int dist = edge.second;
+
+                if(distvec[x]!=INT_MAX && distvec[x]+dist<distvec[y]){
+                    //first check to prevent overflow if any and 2nd is the logic(X->Y)
+                    distvec[y] = distvec[x]+dist;
+                }
+            }
+      }  
+       for(auto edge:l){
+                int x = edge.first.first;
+                int y = edge.first.second;
+                int dist = edge.second;
+
+                if(distvec[x]!=INT_MAX && distvec[x]+dist<distvec[y]){
+                    b=0;
+                    break;
+                }
+         }
+
+        if(!b){
+            cout<<"Neg wt cycle"<<endl;
+        }
+        else{
+            for(i=0;i<vertices;i++){
+                cout<<"Distance of node "<<i<<" from source is "<<distvec[i]<<endl;
+            }
+        }
+
+        
+      
+
+    }
+};
+int main() {
+    graph g(4,0);
+    g.add_edge(0,1,-3);
+    g.add_edge(1,2,7);
+    g.add_edge(2,3,-2);
+    g.add_edge(3,0,-2);
+    g.bellman();
+    
+
+}
