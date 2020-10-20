@@ -6,6 +6,12 @@ class heap{
     vector<int>v;
     bool isminheap;
     public:
+     heap(bool type=true){
+        isminheap=type;
+        v.push_back(-1);
+    }
+
+
     bool compare(int a,int b){
         //a->index b->pindex
         if(isminheap){
@@ -16,10 +22,24 @@ class heap{
         }
     }
 
-    heap(bool type=true){
-        isminheap=type;
-        v.push_back(-1);
+    void heapify(int idx){
+        int lind=2*idx;
+        int rind=lind+1;
+        int lastind = v.size()-1;
+        int min_index = idx;
+        if(lind<=lastind && compare(v[lind],v[idx])){
+            min_index=lind;
+        }
+        if(rind<=lastind && compare(v[rind],v[min_index])){
+            min_index=rind;
+        }
+        if(min_index!=idx){
+            swap(v[min_index],v[idx]);
+            heapify(min_index);
+        }
     }
+
+   
 
     void push(int d){
         //Add element at end
@@ -39,6 +59,18 @@ class heap{
         }
 
     }
+
+    int get(){
+       return  v[1];
+    }
+
+    void pop(){
+        int s = v.size()-1;//current last index
+        swap(v[1],v[s]);
+        v.pop_back();//deleted the first ie min/max ele
+        heapify(1);//heapify the tree form first index
+    }
+
     void print(){
         for(int i=1;i<v.size();i++){
             cout<<v[i]<<" ";
@@ -49,10 +81,13 @@ class heap{
 
 
 int main() {
-    heap h(true);
+    heap h(false);
     h.push(5);
     h.push(2);
     h.push(-1);
     h.push(12);
+    h.print();
+    h.pop();
+    cout<<endl;
     h.print();
 }
