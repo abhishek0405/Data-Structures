@@ -1,5 +1,5 @@
 ## Data-Structures
-Code Implementations of various Data Structures in *CPP*
+Code Implementations of important Data Structures in *CPP*
 
 Current Work:
 
